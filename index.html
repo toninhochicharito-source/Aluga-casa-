@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Aluga Casa</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #f5f6f8;
+      color: #222;
+    }
+
+    header {
+      background: #ffffff;
+      padding: 18px 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .topo {
+      max-width: 1100px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: #1769aa;
+    }
+
+    .botao-anunciar {
+      background: #1769aa;
+      color: white;
+      border: none;
+      padding: 11px 16px;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #1769aa, #2f8edb);
+      color: white;
+      padding: 45px 20px;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: 16px;
+      margin-bottom: 25px;
+    }
+
+    .busca {
+      background: white;
+      max-width: 850px;
+      margin: auto;
+      padding: 15px;
+      border-radius: 12px;
+      display: flex;
+      gap: 10px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+    }
+
+    .busca input,
+    .busca select {
+      flex: 1;
+      padding: 13px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 15px;
+    }
+
+    .botao-buscar {
+      background: #1769aa;
+      color: white;
+      border: none;
+      padding: 13px 20px;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 35px auto;
+      padding: 0 20px;
+    }
+
+    .titulo-secao {
+      margin-bottom: 20px;
+    }
+
+    .titulo-secao h2 {
+      font-size: 24px;
+    }
+
+    .imoveis {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+      transition: 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+    }
+
+    .foto {
+      height: 190px;
+      background: #ddd;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #777;
+      font-size: 15px;
+    }
+
+    .conteudo {
+      padding: 17px;
+    }
+
+    .conteudo h3 {
+      margin-bottom: 8px;
+      font-size: 19px;
+    }
+
+    .local {
+      color: #666;
+      margin-bottom: 12px;
+    }
+
+    .detalhes {
+      color: #555;
+      font-size: 14px;
+      margin-bottom: 15px;
+    }
+
+    .preco {
+      font-size: 21px;
+      font-weight: bold;
+      color: #1769aa;
+      margin-bottom: 15px;
+    }
+
+    .ver-imovel {
+      width: 100%;
+      border: none;
+      background: #1769aa;
+      color: white;
+      padding: 12px;
+      border-radius: 7px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .sem-resultados {
+      display: none;
+      background: white;
+      padding: 30px;
+      text-align: center;
+      border-radius: 10px;
+      margin-top: 20px;
+    }
+
+    footer {
+      margin-top: 50px;
+      padding: 30px 20px;
+      background: #222;
+      color: white;
+      text-align: center;
+    }
+
+    @media (max-width: 800px) {
+      .imoveis {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .busca {
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 550px) {
+      .topo {
+        flex-direction: column;
+      }
+
+      .hero h1 {
+        font-size: 26px;
+      }
+
+      .imoveis {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="topo">
+      <div class="logo">🏠 Aluga Casa</div>
+
+      <button class="botao-anunciar" onclick="anunciar()">
+        + Anunciar imóvel
+      </button>
+    </div>
+  </header>
+
+  <section class="hero">
+    <h1>Encontre sua próxima casa</h1>
+
+    <p>
+      Casas e imóveis para alugar de forma simples e rápida.
+    </p>
+
+    <div class="busca">
+      <input
+        type="text"
+        id="cidade"
+        placeholder="Digite a cidade ou bairro"
+      >
+
+      <select id="tipo">
+        <option value="">Todos os imóveis</option>
+        <option value="Casa">Casa</option>
+        <option value="Apartamento">Apartamento</option>
+        <option value="Kitnet">Kitnet</option>
+      </select>
+
+      <button class="botao-buscar" onclick="buscar()">
+        Buscar
+      </button>
+    </div>
+  </section>
+
+  <main>
+
+    <div class="titulo-secao">
+      <h2>Imóveis disponíveis</h2>
+    </div>
+
+    <div class="imoveis" id="listaImoveis">
+
+      <div class="card" data-cidade="Juiz de Fora" data-tipo="Casa">
+        <div class="foto">
+          Foto do imóvel
+        </div>
+
+        <div class="conteudo">
+          <h3>Casa com 2 quartos</h3>
+
+          <div class="local">
+            📍 Juiz de Fora - MG
+          </div>
+
+          <div class="detalhes">
+            🛏️ 2 quartos · 🚿 1 banheiro · 🚗 1 vaga
+          </div>
+
+          <div class="preco">
+            R$ 1.200/mês
+          </div>
+
+          <button class="ver-imovel" onclick="verImovel('Casa com 2 quartos')">
+            Ver imóvel
+          </button>
+        </div>
+      </div>
+
+
+      <div class="card" data-cidade="Juiz de Fora" data-tipo="Apartamento">
+        <div class="foto">
+          Foto do imóvel
+        </div>
+
+        <div class="conteudo">
+          <h3>Apartamento confortável</h3>
+
+          <div class="local">
+            📍 Juiz de Fora - MG
+          </div>
+
+          <div class="detalhes">
+            🛏️ 2 quartos · 🚿 1 banheiro · 🏢 Condomínio
+          </div>
+
+          <div class="preco">
+            R$ 1.350/mês
+          </div>
+
+          <button class="ver-imovel" onclick="verImovel('Apartamento confortável')">
+            Ver imóvel
+          </button>
+        </div>
+      </div>
+
+
+      <div class="card" data-cidade="Juiz de Fora" data-tipo="Kitnet">
+        <div class="foto">
+          Foto do imóvel
+        </div>
+
+        <div class="conteudo">
+          <h3>Kitnet mobiliada</h3>
+
+          <div class="local">
+            📍 Juiz de Fora - MG
+          </div>
+
+          <div class="detalhes">
+            🛏️ 1 quarto · 🚿 1 banheiro · 🪑 Mobiliada
+          </div>
+
+          <div class="preco">
+            R$ 800/mês
+          </div>
+
+          <button class="ver-imovel" onclick="verImovel('Kitnet mobiliada')">
+            Ver imóvel
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="sem-resultados" id="semResultados">
+      <h3>Nenhum imóvel encontrado.</h3>
+      <p>Faça uma nova busca.</p>
+    </div>
+
+  </main>
+
+  <footer>
+    <p>© 2026 Aluga Casa</p>
+    <p>Encontre seu próximo imóvel para alugar.</p>
+  </footer>
+
+
+  <script>
+
+    function buscar() {
+
+      const cidade =
+        document.getElementById("cidade").value.toLowerCase().trim();
+
+      const tipo =
+        document.getElementById("tipo").value;
+
+      const cards =
+        document.querySelectorAll(".card");
+
+      let encontrados = 0;
+
+      cards.forEach(function(card) {
+
+        const cidadeImovel =
+          card.dataset.cidade.toLowerCase();
+
+        const tipoImovel =
+          card.dataset.tipo;
+
+        const cidadeOk =
+          cidade === "" ||
+          cidadeImovel.includes(cidade);
+
+        const tipoOk =
+          tipo === "" ||
+          tipoImovel === tipo;
+
+        if (cidadeOk && tipoOk) {
+          card.style.display = "block";
+          encontrados++;
+        } else {
+          card.style.display = "none";
+        }
+
+      });
+
+      document.getElementById("semResultados").style.display =
+        encontrados === 0 ? "block" : "none";
+    }
+
+
+    function verImovel(nome) {
+
+      alert(
+        "Você selecionou: " +
+        nome +
+        "\\n\\nEm breve teremos a página completa deste imóvel."
+      );
+
+    }
+
+
+    function anunciar() {
+
+      alert(
+        "Área para anunciar imóvel.\\n\\nVamos criar essa função nas próximas etapas."
+      );
+
+    }
+
+  </script>
+
+</body>
+</html>
