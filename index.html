@@ -582,7 +582,58 @@ function salvarImovel(event){
   alert("Imóvel publicado com sucesso!");
 
   location.reload();
+} 
+  function carregarAnuncios(){
+  const lista=JSON.parse(
+    localStorage.getItem("alugaCasaImoveis")||"[]"
+  );
+
+  const container=document.getElementById("lista");
+
+  lista.forEach(function(imovel){
+
+    const card=document.createElement("div");
+
+    card.className="card";
+
+    card.dataset.cidade=(
+      imovel.local+" "+imovel.bairro
+    ).toLowerCase();
+
+    card.dataset.tipo=imovel.tipo;
+
+    card.innerHTML=`
+      <div class="foto">${imovel.icone}</div>
+
+      <div class="conteudo">
+        <h3>${imovel.titulo}</h3>
+
+        <div class="local">
+          📍 ${imovel.bairro} - ${imovel.local}
+        </div>
+
+        <div class="detalhes">
+          ${imovel.quartos} quartos •
+          ${imovel.banheiro} banheiros •
+          ${imovel.vagas} vagas
+        </div>
+
+        <div class="preco">
+          R$ ${imovel.preco}/mês
+        </div>
+
+        <button class="ver"
+          onclick="verImovel('${imovel.id}')">
+          Ver imóvel
+        </button>
+      </div>
+    `;
+
+    container.appendChild(card);
+  });
 }
+
+carregarAnuncios();
 </script>
 
 </body>
