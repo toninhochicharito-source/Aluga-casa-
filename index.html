@@ -541,7 +541,48 @@ function anunciar(){
   cadastro.style.display="block";
   cadastro.scrollIntoView({behavior:"smooth"});
 }
+function fecharCadastro(){
+  document.getElementById("cadastro").style.display="none";
+}
 
+function salvarImovel(event){
+  event.preventDefault();
+
+  const novo={
+    id:"user_"+Date.now(),
+    titulo:document.getElementById("titulo").value.trim(),
+    tipo:document.getElementById("cadTipo").value,
+    local:document.getElementById("cidade").value.trim(),
+    bairro:document.getElementById("bairro").value.trim(),
+    quartos:document.getElementById("quartos").value,
+    banheiro:document.getElementById("banheiros").value,
+    vagas:document.getElementById("vagas").value,
+    preco:Number(document.getElementById("preco").value)
+      .toLocaleString("pt-BR",{minimumFractionDigits:2}),
+    contato:document.getElementById("contato").value.trim(),
+    descricao:document.getElementById("descricao").value.trim(),
+    icone:document.getElementById("cadTipo").value==="apartamento"
+      ?"🏢"
+      :document.getElementById("cadTipo").value==="kitnet"
+      ?"🏡"
+      :"🏠"
+  };
+
+  const lista=JSON.parse(
+    localStorage.getItem("alugaCasaImoveis")||"[]"
+  );
+
+  lista.push(novo);
+
+  localStorage.setItem(
+    "alugaCasaImoveis",
+    JSON.stringify(lista)
+  );
+
+  alert("Imóvel publicado com sucesso!");
+
+  location.reload();
+}
 </script>
 
 </body>
