@@ -537,12 +537,9 @@ encodeURIComponent(id);
 
 
 function anunciar(){
-
-alert(
-"Área para anunciar imóvel.\n\n" +
-"Na próxima etapa vamos criar o cadastro de imóveis."
-);
-
+  const cadastro=document.getElementById("cadastro");
+  cadastro.style.display="block";
+  cadastro.scrollIntoView({behavior:"smooth"});
 }
 
 </script>
