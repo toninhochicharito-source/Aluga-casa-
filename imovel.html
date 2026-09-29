@@ -218,7 +218,11 @@ descricao:"Kitnet mobiliada para aluguel, com 1 quarto e 1 banheiro. Uma alterna
 
 const id = new URLSearchParams(location.search).get("imovel");
 
-const imovel = imoveis[id];
+const cadastrados = JSON.parse(localStorage.getItem("alugaCasaImoveis") || "[]");
+
+const imovel = imoveis[id] || cadastrados.find(function(item){
+  return item.id === id;
+});
 
 const app = document.getElementById("app");
 
@@ -257,7 +261,7 @@ ${imovel.titulo}
 </h1>
 
 <div class="local">
-📍 ${imovel.local}
+📍 ${imovel.bairro ? imovel.bairro + " - " : ""}${imovel.local}
 </div>
 
 <div class="preco">
@@ -297,6 +301,15 @@ Tenho interesse neste imóvel
 }
 
 function interesse(){
+  if(imovel.contato){
+    alert("Contato do anunciante:\n" + imovel.contato);
+  }else{
+    alert(
+      "Obrigado pelo interesse!\n\n" +
+      "O contato do anunciante será disponibilizado em uma próxima etapa."
+    );
+  }
+}
 
 alert(
 "Obrigado pelo interesse! Na próxima etapa vamos ligar este botão ao contato do anunciante."
