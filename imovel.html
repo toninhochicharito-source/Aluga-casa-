@@ -178,44 +178,45 @@ grid-template-columns:1fr
 </main>
 
 <script>
-
 const imoveis = {
 
-casa2:{
-titulo:"Casa com 2 quartos",
-local:"Juiz de Fora - MG",
-preco:"R$ 1.200/mês",
-quartos:"2 quartos",
-banheiro:"1 banheiro",
-extra:"1 vaga",
-icone:"🏠",
-descricao:"Casa para aluguel com 2 quartos, 1 banheiro e 1 vaga. Uma opção prática para quem procura moradia em Juiz de Fora."
-},
+  casa2:{
+    titulo:"Casa com 2 quartos",
+    local:"Juiz de Fora - MG",
+    preco:"R$ 1.200/mês",
+    quartos:"2 quartos",
+    banheiro:"1 banheiro",
+    extra:"1 vaga",
+    icone:"🏠",
+    descricao:"Casa para aluguel com 2 quartos, 1 banheiro e 1 vaga. Uma opção prática para quem procura moradia em Juiz de Fora."
+  },
 
-apartamento:{
-titulo:"Apartamento confortável",
-local:"Juiz de Fora - MG",
-preco:"R$ 1.350/mês",
-quartos:"2 quartos",
-banheiro:"1 banheiro",
-extra:"Condomínio",
-icone:"🏢",
-descricao:"Apartamento confortável com 2 quartos, 1 banheiro e estrutura de condomínio. Ideal para quem busca praticidade."
-},
+  apartamento:{
+    titulo:"Apartamento confortável",
+    local:"Juiz de Fora - MG",
+    preco:"R$ 1.350/mês",
+    quartos:"2 quartos",
+    banheiro:"1 banheiro",
+    extra:"Condomínio",
+    icone:"🏢",
+    descricao:"Apartamento confortável com 2 quartos, 1 banheiro e estrutura de condomínio. Ideal para quem busca praticidade."
+  },
 
-kitnet:{
-titulo:"Kitnet mobiliada",
-local:"Juiz de Fora - MG",
-preco:"R$ 800/mês",
-quartos:"1 quarto",
-banheiro:"1 banheiro",
-extra:"Mobiliada",
-icone:"🏡",
-descricao:"Kitnet mobiliada para aluguel, com 1 quarto e 1 banheiro. Uma alternativa compacta para morar em Juiz de Fora."
-}
+  kitnet:{
+    titulo:"Kitnet mobiliada",
+    local:"Juiz de Fora - MG",
+    preco:"R$ 800/mês",
+    quartos:"1 quarto",
+    banheiro:"1 banheiro",
+    extra:"Mobiliada",
+    icone:"🏡",
+    descricao:"Kitnet mobiliada para aluguel, com 1 quarto e 1 banheiro. Uma alternativa compacta para morar em Juiz de Fora."
+  }
 
 };
-  const id = new URLSearchParams(window.location.search).get("imovel");
+
+
+const id = new URLSearchParams(window.location.search).get("imovel");
 
 const cadastrados = JSON.parse(
   localStorage.getItem("alugaCasaImoveis") || "[]"
@@ -233,94 +234,85 @@ const app = document.getElementById("app");
 
 if(!imovel){
 
-app.innerHTML = `
-<div class="erro">
-
-<h2>Imóvel não encontrado</h2>
-
-<p style="margin:12px 0 20px">
-Volte para a página inicial e escolha um imóvel disponível.
-</p>
-
-<button class="voltar" onclick="location.href='index.html'">
-Ir para início
-</button>
-
-</div>
-`;
+  app.innerHTML = `
+    <div class="erro">
+      <h2>Imóvel não encontrado</h2>
+      <p>Não foi possível localizar este imóvel.</p>
+    </div>
+  `;
 
 }else{
 
-document.title = imovel.titulo + " - Aluga Casa";
+  app.innerHTML = `
+    <div class="galeria">
+      <div class="foto-grande">${imovel.icone}</div>
+    </div>
 
-app.innerHTML = `
+    <div class="detalhes-imovel">
 
-<div class="galeria">
-${imovel.icone}
-</div>
+      <h1>${imovel.titulo}</h1>
 
-<section class="conteudo">
+      <div class="local">
+        📍 ${imovel.bairro ? imovel.bairro + " - " : ""}${imovel.local}
+      </div>
 
-<h1>
-${imovel.titulo}
-</h1>
+      <div class="preco">
+        ${imovel.preco}
+        ${imovel.preco && !String(imovel.preco).includes("/mês") ? "/mês" : ""}
+      </div>
 
-<div class="local">
-📍 ${imovel.bairro ? imovel.bairro + " - " : ""}${imovel.local}
-</div>
+      <div class="info">
 
-<div class="preco">
-${imovel.preco}
-</div>
+        <div class="item">
+          <strong>🛏️</strong>
+          ${imovel.quartos}
+        </div>
 
-<div class="info">
+        <div class="item">
+          <strong>🚿</strong>
+          ${imovel.banheiro}
+        </div>
 
-<div class="item">
-<strong>🛏️</strong>
-${imovel.quartos}
-</div>
+        <div class="item">
+          <strong>⭐</strong>
+          ${imovel.extra || (imovel.vagas + " vagas")}
+        </div>
 
-<div class="item">
-<strong>🚿</strong>
-${imovel.banheiro}
-</div>
+      </div>
 
-<div class="item">
-<strong>⭐</strong>
-${imovel.extra}
-</div>
+      <div class="descricao">
+        <h2>Sobre o imóvel</h2>
+        <p>${imovel.descricao}</p>
+      </div>
 
-</div>
+      <button class="interesse" onclick="interesse()">
+        Tenho interesse neste imóvel
+      </button>
 
-<p class="descricao">
-${imovel.descricao}
-</p>
-
-<button class="contato" onclick="interesse()">
-Tenho interesse neste imóvel
-</button>
-
-</section>
-`;
-
+    </div>
+  `;
 }
 
+
 function interesse(){
-  if(imovel.contato){
-    alert("Contato do anunciante:\n" + imovel.contato);
+
+  if(imovel && imovel.contato){
+
+    alert(
+      "Contato do anunciante:\n" +
+      imovel.contato
+    );
+
   }else{
+
     alert(
       "Obrigado pelo interesse!\n\n" +
       "O contato do anunciante será disponibilizado em uma próxima etapa."
     );
+
   }
 }
 
-alert(
-"Obrigado pelo interesse! Na próxima etapa vamos ligar este botão ao contato do anunciante."
-);
-
-}
 
 </script>
 
