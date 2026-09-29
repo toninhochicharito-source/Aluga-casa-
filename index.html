@@ -225,7 +225,45 @@ Buscar
 </div>
 
 </section>
+<section class="cadastro" id="cadastro" style="display:none">
+  <h2>🏠 Anunciar imóvel</h2>
 
+  <form id="formCadastro" onsubmit="salvarImovel(event)">
+    <div class="cadastro-grid">
+
+      <input id="titulo" required placeholder="Título do anúncio (ex.: Casa com 2 quartos)">
+
+      <select id="cadTipo" required>
+        <option value="">Tipo de imóvel</option>
+        <option value="casa">Casa</option>
+        <option value="apartamento">Apartamento</option>
+        <option value="kitnet">Kitnet</option>
+      </select>
+
+      <input id="cidade" required placeholder="Cidade - Estado">
+
+      <input id="bairro" required placeholder="Bairro">
+
+      <input id="quartos" required type="number" min="0" placeholder="Quantidade de quartos">
+
+      <input id="banheiros" required type="number" min="0" placeholder="Quantidade de banheiros">
+
+      <input id="vagas" required type="number" min="0" placeholder="Quantidade de vagas">
+
+      <input id="preco" required type="number" min="0" step="0.01" placeholder="Valor do aluguel (R$)">
+
+      <input id="contato" required placeholder="WhatsApp ou telefone para contato">
+
+      <textarea id="descricao" required placeholder="Descreva o imóvel"></textarea>
+
+    </div>
+
+    <div class="acoes">
+      <button class="salvar" type="submit">Publicar imóvel</button>
+      <button class="cancelar" type="button" onclick="fecharCadastro()">Cancelar</button>
+    </div>
+  </form>
+</section>
 <section class="imoveis" id="lista">
 
 <div
