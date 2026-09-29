@@ -5,7 +5,76 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Aluga Casa</title>
+.cadastro{
+  background:#fff;
+  padding:20px;
+  border-radius:14px;
+  box-shadow:0 2px 10px rgba(0,0,0,.07);
+  margin-bottom:25px;
+}
 
+.cadastro h2{
+  margin-bottom:15px;
+}
+
+.cadastro-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+}
+
+.cadastro-grid input,
+.cadastro-grid select,
+.cadastro-grid textarea{
+  width:100%;
+  padding:12px;
+  border:1px solid #ddd;
+  border-radius:8px;
+  font-size:15px;
+  box-sizing:border-box;
+}
+
+.cadastro-grid textarea{
+  min-height:100px;
+  resize:vertical;
+  grid-column:1/-1;
+}
+
+.cadastro .acoes{
+  display:flex;
+  gap:10px;
+  margin-top:12px;
+}
+
+.salvar{
+  border:0;
+  background:#1769aa;
+  color:#fff;
+  padding:12px 18px;
+  border-radius:8px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.cancelar{
+  border:0;
+  background:#eee;
+  color:#444;
+  padding:12px 18px;
+  border-radius:8px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+@media(max-width:700px){
+  .cadastro-grid{
+    grid-template-columns:1fr;
+  }
+
+  .cadastro-grid textarea{
+    grid-column:auto;
+  }
+}
 <style>
 *{
 box-sizing:border-box;
