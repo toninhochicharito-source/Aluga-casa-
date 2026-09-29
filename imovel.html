@@ -215,14 +215,19 @@ descricao:"Kitnet mobiliada para aluguel, com 1 quarto e 1 banheiro. Uma alterna
 }
 
 };
+  const id = new URLSearchParams(window.location.search).get("imovel");
 
-const id = new URLSearchParams(location.search).get("imovel");
+const cadastrados = JSON.parse(
+  localStorage.getItem("alugaCasaImoveis") || "[]"
+);
 
-const cadastrados = JSON.parse(localStorage.getItem("alugaCasaImoveis") || "[]");
+let imovel = imoveis[id];
 
-const imovel = imoveis[id] || cadastrados.find(function(item){
-  return item.id === id;
-});
+if(!imovel){
+  imovel = cadastrados.find(function(item){
+    return String(item.id) === String(id);
+  });
+}
 
 const app = document.getElementById("app");
 
