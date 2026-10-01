@@ -126,10 +126,14 @@ color:#444;
 margin-bottom:24px;
 }
 
+.descricao h2{
+margin-bottom:10px;
+}
+
 .contato{
 width:100%;
 border:0;
-background:#1769aa;
+background:#25D366;
 color:#fff;
 padding:14px;
 border-radius:9px;
@@ -145,6 +149,10 @@ padding:35px;
 border-radius:14px;
 }
 
+.erro h2{
+margin-bottom:10px;
+}
+
 @media(max-width:600px){
 
 .galeria{
@@ -153,6 +161,10 @@ height:230px;
 
 .info{
 grid-template-columns:1fr;
+}
+
+h1{
+font-size:24px;
 }
 
 }
@@ -224,13 +236,20 @@ descricao:"Kitnet mobiliada para aluguel, com 1 quarto e 1 banheiro. Uma alterna
 };
 
 
-const id = new URLSearchParams(window.location.search).get("imovel");
+/* ID DO IMÓVEL */
 
-let cadastrados = [];
+const id =
+new URLSearchParams(window.location.search)
+.get("imovel");
+
+
+/* CARREGA ANÚNCIOS SALVOS */
+
+let cadastrados=[];
 
 try{
 
-cadastrados = JSON.parse(
+cadastrados=JSON.parse(
 localStorage.getItem("alugaCasaImoveis") || "[]"
 );
 
@@ -245,25 +264,29 @@ cadastrados=[];
 }
 
 
-let imovel = imoveis[id];
+/* PROCURA O IMÓVEL */
+
+let imovel=imoveis[id];
 
 if(!imovel){
 
-imovel = cadastrados.find(function(item){
+imovel=cadastrados.find(function(item){
 
-return String(item.id) === String(id);
+return String(item.id)===String(id);
 
 });
 
 }
 
 
-const app = document.getElementById("app");
+/* MOSTRA NA TELA */
+
+const app=document.getElementById("app");
 
 
 if(!imovel){
 
-app.innerHTML = `
+app.innerHTML=`
 
 <div class="erro">
 
@@ -280,35 +303,53 @@ Não foi possível localizar este imóvel.
 }else{
 
 
-const preco = String(imovel.preco || "");
+let preco=String(imovel.preco || "");
 
-const precoFinal =
-preco.includes("/mês")
-? preco
-: preco + "/mês";
-
-
-const quartos =
-imovel.quartos || "Não informado";
+if(!preco.includes("/mês")){
+preco="R$ "+preco+"/mês";
+}
 
 
-const banheiro =
-imovel.banheiro || "Não informado";
+let quartos=
+imovel.quartos
+? imovel.quartos+" quartos"
+: "Não informado";
 
 
-const extra =
-imovel.extra ||
-(imovel.vagas
-? imovel.vagas + " vagas"
-: "Não informado");
+let banheiro=
+imovel.banheiro
+? imovel.banheiro+" banheiros"
+: "Não informado";
 
 
-const descricao =
+let extra="Não informado";
+
+if(imovel.extra){
+
+extra=imovel.extra;
+
+}else if(imovel.vagas){
+
+extra=imovel.vagas+" vagas";
+
+}
+
+
+let descricao=
 imovel.descricao ||
 "Descrição não informada.";
 
 
-app.innerHTML = `
+let local="";
+
+if(imovel.bairro){
+local+=imovel.bairro+" - ";
+}
+
+local+=imovel.local || "";
+
+
+app.innerHTML=`
 
 <div class="galeria">
 
@@ -327,18 +368,12 @@ ${imovel.titulo || "Imóvel para aluguel"}
 
 
 <div class="local">
-
-📍 ${imovel.bairro
-? imovel.bairro + " - "
-: ""}${imovel.local || ""}
-
+📍 ${local}
 </div>
 
 
 <div class="preco">
-
-${precoFinal}
-
+${preco}
 </div>
 
 
@@ -387,7 +422,9 @@ ${descricao}
 
 
 <button class="contato" onclick="interesse()">
+
 📱 Falar com o anunciante pelo WhatsApp
+
 </button>
 
 </div>
@@ -396,23 +433,63 @@ ${descricao}
 
 }
 
-  function interesse(){
-  if(imovel && imovel.contato){
-    let numero = imovel.contato.replace(/\D/g,"");
 
-    if(numero.startsWith("0")){
-      numero = numero.substring(1);
-    }
+/* WHATSAPP */
 
-    if(!numero.startsWith("55")){
-      numero = "55" + numero;
-    }
+function interesse(){
 
-    window.open("https://wa.me/" + numero, "_blank");
-  } else {
-    alert("O contato do anunciante não foi informado.");
-  }
-  
+if(!imovel){
+
+alert("Imóvel não encontrado.");
+
+return;
+
+}
+
+
+if(!imovel.contato){
+
+alert(
+"O anunciante não informou um número de WhatsApp."
+);
+
+return;
+
+}
+
+
+let numero=
+String(imovel.contato)
+.replace(/\D/g,"");
+
+
+if(numero.startsWith("0")){
+
+numero=numero.substring(1);
+
+}
+
+
+if(!numero.startsWith("55")){
+
+numero="55"+numero;
+
+}
+
+
+if(numero.length < 12){
+
+alert(
+"O número de WhatsApp informado parece estar incompleto."
+);
+
+return;
+
+}
+
+
+window.location.href=
+"https://wa.me/"+numero;
 
 }
 
