@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Detalhes do imóvel - Aluga Casa</title>
+<title>Aluga Casa</title>
 
 <style>
 
@@ -27,16 +27,16 @@ padding:16px 20px;
 box-shadow:0 2px 8px rgba(0,0,0,.08);
 position:sticky;
 top:0;
-z-index:10;
+z-index:20;
 }
 
 .topo{
-max-width:1000px;
+max-width:1100px;
 margin:auto;
 display:flex;
 align-items:center;
 justify-content:space-between;
-gap:15px;
+gap:10px;
 }
 
 .logo{
@@ -45,131 +45,290 @@ font-weight:bold;
 color:#1769aa;
 }
 
-.voltar{
-border:0;
-background:#eef5fb;
-color:#1769aa;
-padding:10px 14px;
-border-radius:8px;
-font-weight:bold;
+.topo-acoes{
+display:flex;
+gap:8px;
+flex-wrap:wrap;
+}
+
+button{
 cursor:pointer;
 }
 
+.anunciar,
+.conta-btn{
+border:0;
+padding:10px 14px;
+border-radius:8px;
+font-weight:bold;
+}
+
+.anunciar{
+background:#1769aa;
+color:#fff;
+}
+
+.conta-btn{
+background:#eef5fb;
+color:#1769aa;
+}
+
 main{
-max-width:1000px;
-margin:30px auto;
-padding:0 20px;
+max-width:1100px;
+margin:25px auto;
+padding:0 15px;
 }
 
-.galeria{
-background:#dfe7ee;
+.painel{
+background:#fff;
+padding:20px;
 border-radius:14px;
-height:320px;
+box-shadow:0 2px 10px rgba(0,0,0,.07);
+margin-bottom:20px;
+}
+
+.painel h2{
+margin-bottom:15px;
+}
+
+.formulario{
+display:grid;
+grid-template-columns:1fr 180px 150px 100px;
+gap:10px;
+}
+
+input,
+select,
+textarea{
+width:100%;
+padding:12px;
+border:1px solid #ddd;
+border-radius:8px;
+font-size:15px;
+}
+
+.buscar{
+border:0;
+background:#1769aa;
+color:#fff;
+border-radius:8px;
+font-weight:bold;
+}
+
+.cadastro{
+display:none;
+}
+
+.cadastro-grid{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:10px;
+}
+
+.cadastro-grid textarea{
+grid-column:1/-1;
+min-height:100px;
+resize:vertical;
+}
+
+.fotos-label{
+grid-column:1/-1;
+font-weight:bold;
+margin-top:5px;
+}
+
+.acoes{
 display:flex;
-align-items:center;
-justify-content:center;
-font-size:70px;
-margin-bottom:22px;
+gap:10px;
+margin-top:15px;
+flex-wrap:wrap;
 }
 
-.foto-grande{
-font-size:90px;
+.salvar{
+border:0;
+background:#1769aa;
+color:#fff;
+padding:12px 18px;
+border-radius:8px;
+font-weight:bold;
 }
 
-.conteudo{
+.cancelar{
+border:0;
+background:#eee;
+color:#444;
+padding:12px 18px;
+border-radius:8px;
+font-weight:bold;
+}
+
+.conta{
+display:none;
+}
+
+.conta-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
+}
+
+.conta-acoes{
+margin-top:12px;
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+}
+
+.lista{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:18px;
+}
+
+.card{
 background:#fff;
 border-radius:14px;
-padding:24px;
+overflow:hidden;
 box-shadow:0 2px 10px rgba(0,0,0,.07);
 }
 
-h1{
-font-size:28px;
-margin-bottom:10px;
+.foto{
+height:190px;
+background:#dfe7ee;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:65px;
+overflow:hidden;
+}
+
+.foto img{
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+.conteudo{
+padding:17px;
+}
+
+.conteudo h3{
+font-size:19px;
+margin-bottom:8px;
 }
 
 .local{
 color:#666;
-margin-bottom:18px;
+margin-bottom:10px;
+}
+
+.detalhes{
+font-size:14px;
+color:#555;
+margin-bottom:10px;
 }
 
 .preco{
-font-size:26px;
+font-size:20px;
 font-weight:bold;
 color:#1769aa;
-margin-bottom:20px;
+margin-bottom:12px;
 }
 
-.info{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:10px;
-margin-bottom:24px;
-}
-
-.item{
-background:#f5f6f8;
-padding:14px;
-border-radius:9px;
-text-align:center;
-}
-
-.item strong{
-display:block;
-font-size:18px;
-margin-bottom:4px;
-}
-
-.descricao{
-line-height:1.6;
-color:#444;
-margin-bottom:24px;
-}
-
-.descricao h2{
-margin-bottom:10px;
-}
-
-.contato{
+.ver{
 width:100%;
 border:0;
-background:#25D366;
-color:#fff;
-padding:14px;
-border-radius:9px;
+background:#eef5fb;
+color:#1769aa;
+padding:11px;
+border-radius:8px;
 font-weight:bold;
-font-size:16px;
-cursor:pointer;
 }
 
-.erro{
-text-align:center;
+.botoes-card{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:8px;
+margin-top:8px;
+}
+
+.editar{
+border:0;
+background:#fff3cd;
+color:#856404;
+padding:10px;
+border-radius:8px;
+font-weight:bold;
+}
+
+.excluir{
+border:0;
+background:#fde2e2;
+color:#b42318;
+padding:10px;
+border-radius:8px;
+font-weight:bold;
+}
+
+.vazio{
+grid-column:1/-1;
 background:#fff;
-padding:35px;
+padding:30px;
+text-align:center;
 border-radius:14px;
+color:#666;
 }
 
-.erro h2{
-margin-bottom:10px;
+.status{
+margin-top:10px;
+padding:10px;
+border-radius:8px;
+background:#eef5fb;
+color:#1769aa;
+display:none;
 }
 
-@media(max-width:600px){
-
-.galeria{
-height:230px;
+.preview{
+display:flex;
+gap:8px;
+flex-wrap:wrap;
+margin-top:8px;
 }
 
-.info{
+.preview img{
+width:80px;
+height:60px;
+object-fit:cover;
+border-radius:7px;
+}
+
+@media(max-width:800px){
+
+.formulario{
 grid-template-columns:1fr;
 }
 
-h1{
-font-size:24px;
+.lista{
+grid-template-columns:1fr;
+}
+
+.cadastro-grid,
+.conta-grid{
+grid-template-columns:1fr;
+}
+
+.cadastro-grid textarea{
+grid-column:auto;
+}
+
+.topo{
+align-items:flex-start;
 }
 
 }
 
 </style>
+
 </head>
 
 <body>
@@ -182,9 +341,17 @@ font-size:24px;
 🏠 Aluga Casa
 </div>
 
-<button class="voltar" onclick="history.back()">
-← Voltar
+<div class="topo-acoes">
+
+<button class="conta-btn" onclick="abrirConta()">
+👤 Minha conta
 </button>
+
+<button class="anunciar" onclick="abrirCadastro()">
++ Anunciar imóvel
+</button>
+
+</div>
 
 </div>
 
@@ -192,309 +359,896 @@ font-size:24px;
 
 <main>
 
-<div id="app"></div>
+<section class="painel">
+
+<h2>🔎 Encontre seu imóvel</h2>
+
+<div class="formulario">
+
+<input
+id="busca"
+placeholder="Cidade ou bairro"
+>
+
+<select id="tipoFiltro">
+
+<option value="">Todos os tipos</option>
+<option value="casa">Casa</option>
+<option value="apartamento">Apartamento</option>
+<option value="kitnet">Kitnet</option>
+
+</select>
+
+<input
+id="precoMax"
+type="number"
+placeholder="Preço máximo"
+>
+
+<button
+class="buscar"
+onclick="buscarImoveis()"
+>
+Buscar
+</button>
+
+</div>
+
+</section>
+
+
+<section
+class="painel cadastro"
+id="cadastro"
+>
+
+<h2 id="tituloCadastro">
+🏠 Anunciar imóvel
+</h2>
+
+<form onsubmit="salvarImovel(event)">
+
+<div class="cadastro-grid">
+
+<input
+id="titulo"
+required
+placeholder="Título do anúncio"
+>
+
+<select id="cadTipo" required>
+
+<option value="">
+Tipo de imóvel
+</option>
+
+<option value="casa">
+Casa
+</option>
+
+<option value="apartamento">
+Apartamento
+</option>
+
+<option value="kitnet">
+Kitnet
+</option>
+
+</select>
+
+<input
+id="cidade"
+required
+placeholder="Cidade - Estado"
+>
+
+<input
+id="bairro"
+required
+placeholder="Bairro"
+>
+
+<input
+id="quartos"
+required
+type="number"
+min="0"
+placeholder="Quartos"
+>
+
+<input
+id="banheiros"
+required
+type="number"
+min="0"
+placeholder="Banheiros"
+>
+
+<input
+id="vagas"
+required
+type="number"
+min="0"
+placeholder="Vagas"
+>
+
+<input
+id="preco"
+required
+type="number"
+min="0"
+step="0.01"
+placeholder="Aluguel - R$"
+>
+
+<input
+id="contato"
+required
+placeholder="WhatsApp do anunciante"
+>
+
+<textarea
+id="descricao"
+required
+placeholder="Descreva o imóvel"
+></textarea>
+
+<div class="fotos-label">
+📸 Fotos do imóvel — até 3 fotos
+</div>
+
+<input
+id="fotos"
+type="file"
+accept="image/*"
+multiple
+onchange="mostrarPreview()"
+>
+
+<div
+id="preview"
+class="preview"
+>
+</div>
+
+</div>
+
+<div class="acoes">
+
+<button
+class="salvar"
+type="submit"
+>
+Publicar imóvel
+</button>
+
+<button
+class="cancelar"
+type="button"
+onclick="fecharCadastro()"
+>
+Cancelar
+</button>
+
+</div>
+
+<input
+type="hidden"
+id="editandoId"
+>
+
+</form>
+
+</section>
+
+
+<section
+class="painel conta"
+id="conta"
+>
+
+<h2>👤 Minha conta</h2>
+
+<div class="conta-grid">
+
+<input
+id="nomeUsuario"
+placeholder="Seu nome"
+>
+
+<input
+id="emailUsuario"
+type="email"
+placeholder="Seu e-mail"
+>
+
+</div>
+
+<div class="conta-acoes">
+
+<button
+class="salvar"
+onclick="salvarConta()"
+>
+Salvar conta
+</button>
+
+<button
+class="cancelar"
+onclick="fecharConta()"
+>
+Fechar
+</button>
+
+</div>
+
+<div
+id="statusConta"
+class="status"
+>
+</div>
+
+</section>
+
+
+<section
+class="lista"
+id="lista"
+>
+
+<!-- IMÓVEIS FIXOS -->
+
+<div
+class="card"
+data-cidade="juiz de fora"
+data-bairro="juiz de fora"
+data-tipo="casa"
+data-preco="1200"
+>
+
+<div class="foto">
+🏠
+</div>
+
+<div class="conteudo">
+
+<h3>
+Casa com 2 quartos
+</h3>
+
+<div class="local">
+📍 Juiz de Fora - MG
+</div>
+
+<div class="detalhes">
+2 quartos • 1 banheiro • 1 vaga
+</div>
+
+<div class="preco">
+R$ 1.200/mês
+</div>
+
+<button
+class="ver"
+onclick="verImovel('casa2')"
+>
+Ver imóvel
+</button>
+
+</div>
+
+</div>
+
+
+<div
+class="card"
+data-cidade="juiz de fora"
+data-bairro="juiz de fora"
+data-tipo="apartamento"
+data-preco="1350"
+>
+
+<div class="foto">
+🏢
+</div>
+
+<div class="conteudo">
+
+<h3>
+Apartamento confortável
+</h3>
+
+<div class="local">
+📍 Juiz de Fora - MG
+</div>
+
+<div class="detalhes">
+2 quartos • 1 banheiro • Condomínio
+</div>
+
+<div class="preco">
+R$ 1.350/mês
+</div>
+
+<button
+class="ver"
+onclick="verImovel('apartamento')"
+>
+Ver imóvel
+</button>
+
+</div>
+
+</div>
+
+
+<div
+class="card"
+data-cidade="juiz de fora"
+data-bairro="juiz de fora"
+data-tipo="kitnet"
+data-preco="800"
+>
+
+<div class="foto">
+🏡
+</div>
+
+<div class="conteudo">
+
+<h3>
+Kitnet mobiliada
+</h3>
+
+<div class="local">
+📍 Juiz de Fora - MG
+</div>
+
+<div class="detalhes">
+1 quarto • 1 banheiro • Mobiliada
+</div>
+
+<div class="preco">
+R$ 800/mês
+</div>
+
+<button
+class="ver"
+onclick="verImovel('kitnet')"
+>
+Ver imóvel
+</button>
+
+</div>
+
+</div>
+
+</section>
 
 </main>
 
+
 <script>
 
-const imoveis = {
-
-casa2:{
-titulo:"Casa com 2 quartos",
-local:"Juiz de Fora - MG",
-preco:"R$ 1.200/mês",
-quartos:"2 quartos",
-banheiro:"1 banheiro",
-extra:"1 vaga",
-icone:"🏠",
-descricao:"Casa para aluguel com 2 quartos, 1 banheiro e 1 vaga. Uma opção prática para quem procura moradia em Juiz de Fora."
-},
-
-apartamento:{
-titulo:"Apartamento confortável",
-local:"Juiz de Fora - MG",
-preco:"R$ 1.350/mês",
-quartos:"2 quartos",
-banheiro:"1 banheiro",
-extra:"Condomínio",
-icone:"🏢",
-descricao:"Apartamento confortável com 2 quartos, 1 banheiro e estrutura de condomínio. Ideal para quem busca praticidade."
-},
-
-kitnet:{
-titulo:"Kitnet mobiliada",
-local:"Juiz de Fora - MG",
-preco:"R$ 800/mês",
-quartos:"1 quarto",
-banheiro:"1 banheiro",
-extra:"Mobiliada",
-icone:"🏡",
-descricao:"Kitnet mobiliada para aluguel, com 1 quarto e 1 banheiro. Uma alternativa compacta para morar em Juiz de Fora."
-}
-
-};
+let fotosSelecionadas=[];
 
 
-/* ID DO IMÓVEL */
+/* CONTA */
 
-const id =
-new URLSearchParams(window.location.search)
-.get("imovel");
+function carregarConta(){
 
-
-/* CARREGA ANÚNCIOS SALVOS */
-
-let cadastrados=[];
-
-try{
-
-cadastrados=JSON.parse(
-localStorage.getItem("alugaCasaImoveis") || "[]"
+const conta=JSON.parse(
+localStorage.getItem("alugaCasaConta") || "{}"
 );
 
-if(!Array.isArray(cadastrados)){
-cadastrados=[];
-}
+document.getElementById("nomeUsuario").value=
+conta.nome || "";
 
-}catch(e){
-
-cadastrados=[];
+document.getElementById("emailUsuario").value=
+conta.email || "";
 
 }
 
+function abrirConta(){
 
-/* PROCURA O IMÓVEL */
+document.getElementById("conta").style.display="block";
 
-let imovel=imoveis[id];
+carregarConta();
 
-if(!imovel){
+document.getElementById("conta")
+.scrollIntoView({behavior:"smooth"});
 
-imovel=cadastrados.find(function(item){
+}
 
-return String(item.id)===String(id);
+function fecharConta(){
+
+document.getElementById("conta").style.display="none";
+
+}
+
+function salvarConta(){
+
+const nome=
+document.getElementById("nomeUsuario")
+.value.trim();
+
+const email=
+document.getElementById("emailUsuario")
+.value.trim();
+
+localStorage.setItem(
+"alugaCasaConta",
+JSON.stringify({
+nome:nome,
+email:email
+})
+);
+
+const status=
+document.getElementById("statusConta");
+
+status.innerText="✅ Conta salva neste aparelho.";
+
+status.style.display="block";
+
+}
+
+
+/* CADASTRO */
+
+function abrirCadastro(){
+
+document.getElementById("cadastro")
+.style.display="block";
+
+document.getElementById("tituloCadastro")
+.innerText="🏠 Anunciar imóvel";
+
+document.getElementById("editandoId").value="";
+
+document.getElementById("cadastro")
+.scrollIntoView({behavior:"smooth"});
+
+}
+
+function fecharCadastro(){
+
+document.getElementById("cadastro")
+.style.display="none";
+
+}
+
+function mostrarPreview(){
+
+const arquivos=
+Array.from(
+document.getElementById("fotos").files
+).slice(0,3);
+
+const preview=
+document.getElementById("preview");
+
+preview.innerHTML="";
+
+arquivos.forEach(function(arquivo){
+
+const img=document.createElement("img");
+
+img.src=URL.createObjectURL(arquivo);
+
+preview.appendChild(img);
 
 });
 
 }
 
 
-/* MOSTRA NA TELA */
+/* CONVERTE FOTO PARA ARMAZENAMENTO */
 
-const app=document.getElementById("app");
+function converterFoto(arquivo){
+
+return new Promise(function(resolve){
+
+const reader=new FileReader();
+
+reader.onload=function(){
+
+const img=new Image();
+
+img.onload=function(){
+
+const canvas=document.createElement("canvas");
+
+const limite=900;
+
+let largura=img.width;
+let altura=img.height;
+
+if(largura>limite){
+
+altura=
+altura*(limite/largura);
+
+largura=limite;
+
+}
+
+if(altura>limite){
+
+largura=
+largura*(limite/altura);
+
+altura=limite;
+
+}
+
+canvas.width=largura;
+canvas.height=altura;
+
+const ctx=
+canvas.getContext("2d");
+
+ctx.drawImage(
+img,
+0,
+0,
+largura,
+altura
+);
+
+resolve(
+canvas.toDataURL(
+"image/jpeg",
+0.75
+)
+);
+
+};
+
+img.src=reader.result;
+
+};
+
+reader.readAsDataURL(arquivo);
+
+});
+
+}
 
 
-if(!imovel){
+/* SALVAR */
 
-app.innerHTML=`
+async function salvarImovel(event){
 
-<div class="erro">
+event.preventDefault();
 
-<h2>Imóvel não encontrado</h2>
+const editandoId=
+document.getElementById("editandoId").value;
 
-<p>
-Não foi possível localizar este imóvel.
-</p>
+let lista=JSON.parse(
+localStorage.getItem("alugaCasaImoveis") || "[]"
+);
 
-</div>
 
-`;
+/* FOTOS */
+
+const arquivos=
+Array.from(
+document.getElementById("fotos").files
+).slice(0,3);
+
+let fotos=[];
+
+for(const arquivo of arquivos){
+
+fotos.push(
+await converterFoto(arquivo)
+);
+
+}
+
+
+/* SE ESTIVER EDITANDO */
+
+if(editandoId){
+
+const indice=
+lista.findIndex(
+item=>item.id===editandoId
+);
+
+if(indice>=0){
+
+const antigo=lista[indice];
+
+lista[indice]={
+
+...antigo,
+
+titulo:document.getElementById("titulo").value.trim(),
+
+tipo:document.getElementById("cadTipo").value,
+
+local:document.getElementById("cidade").value.trim(),
+
+bairro:document.getElementById("bairro").value.trim(),
+
+quartos:document.getElementById("quartos").value,
+
+banheiro:document.getElementById("banheiros").value,
+
+vagas:document.getElementById("vagas").value,
+
+preco:Number(
+document.getElementById("preco").value
+).toLocaleString(
+"pt-BR",
+{minimumFractionDigits:2}
+),
+
+contato:document.getElementById("contato").value.trim(),
+
+descricao:document.getElementById("descricao").value.trim(),
+
+fotos:
+fotos.length ? fotos : (antigo.fotos || []),
+
+icone:
+document.getElementById("cadTipo").value==="apartamento"
+?"🏢"
+:
+document.getElementById("cadTipo").value==="kitnet"
+?"🏡"
+:"🏠"
+
+};
+
+}
 
 }else{
 
 
-let preco=String(imovel.preco || "");
+/* NOVO */
 
-if(!preco.includes("/mês")){
-preco="R$ "+preco+"/mês";
+const novo={
+
+id:"user_"+Date.now(),
+
+titulo:
+document.getElementById("titulo")
+.value.trim(),
+
+tipo:
+document.getElementById("cadTipo")
+.value,
+
+local:
+document.getElementById("cidade")
+.value.trim(),
+
+bairro:
+document.getElementById("bairro")
+.value.trim(),
+
+quartos:
+document.getElementById("quartos")
+.value,
+
+banheiro:
+document.getElementById("banheiros")
+.value,
+
+vagas:
+document.getElementById("vagas")
+.value,
+
+preco:
+Number(
+document.getElementById("preco")
+.value
+).toLocaleString(
+"pt-BR",
+{minimumFractionDigits:2}
+),
+
+contato:
+document.getElementById("contato")
+.value.trim(),
+
+descricao:
+document.getElementById("descricao")
+.value.trim(),
+
+fotos:fotos,
+
+icone:
+document.getElementById("cadTipo")
+.value==="apartamento"
+?"🏢"
+:
+document.getElementById("cadTipo")
+.value==="kitnet"
+?"🏡"
+:"🏠"
+
+};
+
+lista.push(novo);
+
 }
 
 
-let quartos=
-imovel.quartos
-? imovel.quartos+" quartos"
-: "Não informado";
+try{
 
+localStorage.setItem(
+"alugaCasaImoveis",
+JSON.stringify(lista)
+);
 
-let banheiro=
-imovel.banheiro
-? imovel.banheiro+" banheiros"
-: "Não informado";
+}catch(e){
 
+alert(
+"Não foi possível salvar as fotos. Tente usar fotos menores."
+);
 
-let extra="Não informado";
+return;
 
-if(imovel.extra){
+}
 
-extra=imovel.extra;
+alert(
+editandoId
+?"✅ Imóvel atualizado com sucesso!"
+:"✅ Imóvel publicado com sucesso!"
+);
 
-}else if(imovel.vagas){
-
-extra=imovel.vagas+" vagas";
+location.reload();
 
 }
 
 
-let descricao=
-imovel.descricao ||
-"Descrição não informada.";
+/* CARREGA ANÚNCIOS */
+
+function carregarAnuncios(){
+
+const lista=JSON.parse(
+localStorage.getItem("alugaCasaImoveis") || "[]"
+);
+
+const container=
+document.getElementById("lista");
+
+lista.forEach(function(imovel){
+
+const card=
+document.createElement("div");
+
+card.className="card";
+
+const cidade=
+(imovel.local+" "+imovel.bairro)
+.toLowerCase();
+
+card.dataset.cidade=cidade;
+card.dataset.bairro=
+(imovel.bairro || "").toLowerCase();
+
+card.dataset.tipo=imovel.tipo;
+
+card.dataset.preco=
+String(imovel.preco)
+.replace(/\./g,"")
+.replace(",",".")
+.replace(/[^\d.]/g,"");
 
 
-let local="";
+let foto=imovel.icone || "🏠";
 
-if(imovel.bairro){
-local+=imovel.bairro+" - ";
+if(imovel.fotos && imovel.fotos.length){
+
+foto=
+"<img src=\""+
+imovel.fotos[0]+
+"\">";
+
 }
 
-local+=imovel.local || "";
+card.innerHTML=`
 
-
-app.innerHTML=`
-
-<div class="galeria">
-
-<div class="foto-grande">
-${imovel.icone || "🏠"}
+<div class="foto">
+${foto}
 </div>
-
-</div>
-
 
 <div class="conteudo">
 
-<h1>
-${imovel.titulo || "Imóvel para aluguel"}
-</h1>
-
+<h3>
+${imovel.titulo}
+</h3>
 
 <div class="local">
-📍 ${local}
+📍 ${imovel.bairro} - ${imovel.local}
 </div>
 
+<div class="detalhes">
+${imovel.quartos} quartos •
+${imovel.banheiro} banheiros •
+${imovel.vagas} vagas
+</div>
 
 <div class="preco">
-${preco}
+R$ ${imovel.preco}/mês
 </div>
 
-
-<div class="info">
-
-<div class="item">
-
-<strong>🛏️</strong>
-
-${quartos}
-
-</div>
-
-
-<div class="item">
-
-<strong>🚿</strong>
-
-${banheiro}
-
-</div>
-
-
-<div class="item">
-
-<strong>⭐</strong>
-
-${extra}
-
-</div>
-
-</div>
-
-
-<div class="descricao">
-
-<h2>
-Sobre o imóvel
-</h2>
-
-<p>
-${descricao}
-</p>
-
-</div>
-
-
-<button class="contato" onclick="interesse()">
-
-📱 Falar com o anunciante pelo WhatsApp
-
+<button
+class="ver"
+onclick="verImovel('${imovel.id}')"
+>
+Ver imóvel
 </button>
+
+<div class="botoes-card">
+
+<button
+class="editar"
+onclick="editarImovel('${imovel.id}')"
+>
+✏️ Editar
+</button>
+
+<button
+class="excluir"
+onclick="excluirImovel('${imovel.id}')"
+>
+🗑️ Excluir
+</button>
+
+</div>
 
 </div>
 
 `;
 
-}
+container.appendChild(card);
 
-
-/* WHATSAPP */
-
-function interesse(){
-
-if(!imovel){
-
-alert("Imóvel não encontrado.");
-
-return;
+});
 
 }
 
 
-if(!imovel.contato){
+/* BUSCA */
 
-alert(
-"O anunciante não informou um número de WhatsApp."
-);
+function buscarImoveis(){
 
-return;
+const texto=
+document.getElementById("busca")
+.value
+.toLowerCase()
+.trim();
 
-}
+const tipo=
+document.getElementById("tipoFiltro")
+.value;
 
+const precoMax=
+Number(
+document.getElementById("precoMax")
+.value
+) || Infinity;
 
-let numero=
-String(imovel.contato)
-.replace(/\D/g,"");
+const cards=
+document.querySelectorAll(".card");
 
+let encontrados=0;
 
-if(numero.startsWith("0")){
+cards.forEach(function(card){
 
-numero=numero.substring(1);
+const cidade=
+(card.dataset.cidade || "");
 
-}
+const tipoCard=
+card.dataset.tipo || "";
 
+const preco=
+Number(card.dataset.preco) || 0;
 
-if(!numero.startsWith("55")){
-
-numero="55"+numero;
-
-}
-
-
-if(numero.length < 12){
-
-alert(
-"O número de WhatsApp informado parece estar incompleto."
-);
-
-return;
-
-}
-
-
-window.location.href=
-"https://wa.me/"+numero;
-
-}
-
-</script>
-
-</body>
-
-</html>
+const textoOK=
+!
