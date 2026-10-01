@@ -387,9 +387,7 @@ ${descricao}
 
 
 <button class="contato" onclick="interesse()">
-
-Tenho interesse neste imóvel
-
+📱 Falar com o anunciante pelo WhatsApp
 </button>
 
 </div>
@@ -398,24 +396,24 @@ Tenho interesse neste imóvel
 
 }
 
+  function interesse(){
+  if(imovel && imovel.contato){
+    let numero = imovel.contato.replace(/\D/g,"");
 
-function interesse(){
+    if(numero.startsWith("0")){
+      numero = numero.substring(1);
+    }
 
-if(imovel && imovel.contato){
+    if(!numero.startsWith("55")){
+      numero = "55" + numero;
+    }
 
-alert(
-"Contato do anunciante:\n\n" +
-imovel.contato
-);
-
-}else{
-
-alert(
-"Obrigado pelo interesse!\n\n" +
-"O contato do anunciante não foi informado."
-);
-
+    window.open("https://wa.me/" + numero, "_blank");
+  } else {
+    alert("O contato do anunciante não foi informado.");
+  }
 }
+
 
 }
 
