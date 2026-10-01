@@ -1,1254 +1,697 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Aluga Casa</title>
+<title>Detalhes do imóvel - Aluga Casa</title>
 
 <style>
 
 *{
-box-sizing:border-box;
-margin:0;
-padding:0;
-font-family:Arial,sans-serif;
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  font-family:Arial,sans-serif;
 }
 
 body{
-background:#f5f6f8;
-color:#222;
+  background:#f5f6f8;
+  color:#222;
 }
 
 header{
-background:#fff;
-padding:16px 20px;
-box-shadow:0 2px 8px rgba(0,0,0,.08);
-position:sticky;
-top:0;
-z-index:20;
+  background:#fff;
+  padding:16px 20px;
+  box-shadow:0 2px 8px rgba(0,0,0,.08);
 }
 
 .topo{
-max-width:1100px;
-margin:auto;
-display:flex;
-align-items:center;
-justify-content:space-between;
-gap:10px;
+  max-width:1000px;
+  margin:auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
 }
 
 .logo{
-font-size:23px;
-font-weight:bold;
-color:#1769aa;
+  font-size:23px;
+  font-weight:bold;
+  color:#1769aa;
 }
 
-.topo-acoes{
-display:flex;
-gap:8px;
-flex-wrap:wrap;
-}
-
-button{
-cursor:pointer;
-}
-
-.anunciar,
-.conta-btn{
-border:0;
-padding:10px 14px;
-border-radius:8px;
-font-weight:bold;
-}
-
-.anunciar{
-background:#1769aa;
-color:#fff;
-}
-
-.conta-btn{
-background:#eef5fb;
-color:#1769aa;
+.voltar{
+  border:0;
+  background:#eef5fb;
+  color:#1769aa;
+  padding:10px 14px;
+  border-radius:8px;
+  font-weight:bold;
+  cursor:pointer;
 }
 
 main{
-max-width:1100px;
-margin:25px auto;
-padding:0 15px;
+  max-width:1000px;
+  margin:25px auto;
+  padding:0 15px;
 }
 
-.painel{
-background:#fff;
-padding:20px;
-border-radius:14px;
-box-shadow:0 2px 10px rgba(0,0,0,.07);
-margin-bottom:20px;
+.galeria{
+  height:360px;
+  background:#dfe7ee;
+  border-radius:14px;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin-bottom:20px;
+  position:relative;
 }
 
-.painel h2{
-margin-bottom:15px;
+.galeria img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
 }
 
-.formulario{
-display:grid;
-grid-template-columns:1fr 180px 150px 100px;
-gap:10px;
+.emoji{
+  font-size:90px;
 }
 
-input,
-select,
-textarea{
-width:100%;
-padding:12px;
-border:1px solid #ddd;
-border-radius:8px;
-font-size:15px;
+.setas{
+  position:absolute;
+  bottom:12px;
+  left:0;
+  right:0;
+  text-align:center;
 }
 
-.buscar{
-border:0;
-background:#1769aa;
-color:#fff;
-border-radius:8px;
-font-weight:bold;
-}
-
-.cadastro{
-display:none;
-}
-
-.cadastro-grid{
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:10px;
-}
-
-.cadastro-grid textarea{
-grid-column:1/-1;
-min-height:100px;
-resize:vertical;
-}
-
-.fotos-label{
-grid-column:1/-1;
-font-weight:bold;
-margin-top:5px;
-}
-
-.acoes{
-display:flex;
-gap:10px;
-margin-top:15px;
-flex-wrap:wrap;
-}
-
-.salvar{
-border:0;
-background:#1769aa;
-color:#fff;
-padding:12px 18px;
-border-radius:8px;
-font-weight:bold;
-}
-
-.cancelar{
-border:0;
-background:#eee;
-color:#444;
-padding:12px 18px;
-border-radius:8px;
-font-weight:bold;
-}
-
-.conta{
-display:none;
-}
-
-.conta-grid{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:10px;
-}
-
-.conta-acoes{
-margin-top:12px;
-display:flex;
-gap:10px;
-flex-wrap:wrap;
-}
-
-.lista{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:18px;
-}
-
-.card{
-background:#fff;
-border-radius:14px;
-overflow:hidden;
-box-shadow:0 2px 10px rgba(0,0,0,.07);
-}
-
-.foto{
-height:190px;
-background:#dfe7ee;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:65px;
-overflow:hidden;
-}
-
-.foto img{
-width:100%;
-height:100%;
-object-fit:cover;
+.setas button{
+  border:0;
+  background:rgba(0,0,0,.55);
+  color:#fff;
+  padding:8px 14px;
+  margin:3px;
+  border-radius:8px;
+  cursor:pointer;
 }
 
 .conteudo{
-padding:17px;
+  background:#fff;
+  border-radius:14px;
+  padding:24px;
+  box-shadow:0 2px 10px rgba(0,0,0,.07);
 }
 
-.conteudo h3{
-font-size:19px;
-margin-bottom:8px;
+h1{
+  font-size:28px;
+  margin-bottom:10px;
 }
 
 .local{
-color:#666;
-margin-bottom:10px;
-}
-
-.detalhes{
-font-size:14px;
-color:#555;
-margin-bottom:10px;
+  color:#666;
+  margin-bottom:18px;
 }
 
 .preco{
-font-size:20px;
-font-weight:bold;
-color:#1769aa;
-margin-bottom:12px;
+  font-size:26px;
+  font-weight:bold;
+  color:#1769aa;
+  margin-bottom:20px;
 }
 
-.ver{
-width:100%;
-border:0;
-background:#eef5fb;
-color:#1769aa;
-padding:11px;
-border-radius:8px;
-font-weight:bold;
+.info{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+  margin-bottom:24px;
 }
 
-.botoes-card{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:8px;
-margin-top:8px;
+.item{
+  background:#f5f6f8;
+  padding:14px;
+  border-radius:9px;
+  text-align:center;
+}
+
+.item strong{
+  display:block;
+  font-size:20px;
+  margin-bottom:5px;
+}
+
+.descricao{
+  line-height:1.6;
+  color:#444;
+  margin-bottom:24px;
+}
+
+.descricao h2{
+  margin-bottom:10px;
+}
+
+.contato,
+.editar,
+.excluir{
+  width:100%;
+  border:0;
+  padding:14px;
+  border-radius:9px;
+  font-weight:bold;
+  font-size:16px;
+  margin-top:8px;
+  cursor:pointer;
+}
+
+.contato{
+  background:#25D366;
+  color:#fff;
 }
 
 .editar{
-border:0;
-background:#fff3cd;
-color:#856404;
-padding:10px;
-border-radius:8px;
-font-weight:bold;
+  background:#fff3cd;
+  color:#856404;
 }
 
 .excluir{
-border:0;
-background:#fde2e2;
-color:#b42318;
-padding:10px;
-border-radius:8px;
-font-weight:bold;
+  background:#fde2e2;
+  color:#b42318;
 }
 
-.vazio{
-grid-column:1/-1;
-background:#fff;
-padding:30px;
-text-align:center;
-border-radius:14px;
-color:#666;
+.erro{
+  background:#fff;
+  padding:35px;
+  border-radius:14px;
+  text-align:center;
 }
 
-.status{
-margin-top:10px;
-padding:10px;
-border-radius:8px;
-background:#eef5fb;
-color:#1769aa;
-display:none;
-}
+@media(max-width:600px){
 
-.preview{
-display:flex;
-gap:8px;
-flex-wrap:wrap;
-margin-top:8px;
-}
+  .galeria{
+    height:260px;
+  }
 
-.preview img{
-width:80px;
-height:60px;
-object-fit:cover;
-border-radius:7px;
-}
+  .info{
+    grid-template-columns:1fr;
+  }
 
-@media(max-width:800px){
-
-.formulario{
-grid-template-columns:1fr;
-}
-
-.lista{
-grid-template-columns:1fr;
-}
-
-.cadastro-grid,
-.conta-grid{
-grid-template-columns:1fr;
-}
-
-.cadastro-grid textarea{
-grid-column:auto;
-}
-
-.topo{
-align-items:flex-start;
-}
+  h1{
+    font-size:24px;
+  }
 
 }
 
 </style>
-
 </head>
 
 <body>
 
 <header>
 
-<div class="topo">
+  <div class="topo">
 
-<div class="logo">
-🏠 Aluga Casa
-</div>
+    <div class="logo">
+      🏠 Aluga Casa
+    </div>
 
-<div class="topo-acoes">
+    <button
+      class="voltar"
+      onclick="history.back()"
+    >
+      ← Voltar
+    </button>
 
-<button class="conta-btn" onclick="abrirConta()">
-👤 Minha conta
-</button>
-
-<button class="anunciar" onclick="abrirCadastro()">
-+ Anunciar imóvel
-</button>
-
-</div>
-
-</div>
+  </div>
 
 </header>
 
 <main>
 
-<section class="painel">
-
-<h2>🔎 Encontre seu imóvel</h2>
-
-<div class="formulario">
-
-<input
-id="busca"
-placeholder="Cidade ou bairro"
->
-
-<select id="tipoFiltro">
-
-<option value="">Todos os tipos</option>
-<option value="casa">Casa</option>
-<option value="apartamento">Apartamento</option>
-<option value="kitnet">Kitnet</option>
-
-</select>
-
-<input
-id="precoMax"
-type="number"
-placeholder="Preço máximo"
->
-
-<button
-class="buscar"
-onclick="buscarImoveis()"
->
-Buscar
-</button>
-
-</div>
-
-</section>
-
-
-<section
-class="painel cadastro"
-id="cadastro"
->
-
-<h2 id="tituloCadastro">
-🏠 Anunciar imóvel
-</h2>
-
-<form onsubmit="salvarImovel(event)">
-
-<div class="cadastro-grid">
-
-<input
-id="titulo"
-required
-placeholder="Título do anúncio"
->
-
-<select id="cadTipo" required>
-
-<option value="">
-Tipo de imóvel
-</option>
-
-<option value="casa">
-Casa
-</option>
-
-<option value="apartamento">
-Apartamento
-</option>
-
-<option value="kitnet">
-Kitnet
-</option>
-
-</select>
-
-<input
-id="cidade"
-required
-placeholder="Cidade - Estado"
->
-
-<input
-id="bairro"
-required
-placeholder="Bairro"
->
-
-<input
-id="quartos"
-required
-type="number"
-min="0"
-placeholder="Quartos"
->
-
-<input
-id="banheiros"
-required
-type="number"
-min="0"
-placeholder="Banheiros"
->
-
-<input
-id="vagas"
-required
-type="number"
-min="0"
-placeholder="Vagas"
->
-
-<input
-id="preco"
-required
-type="number"
-min="0"
-step="0.01"
-placeholder="Aluguel - R$"
->
-
-<input
-id="contato"
-required
-placeholder="WhatsApp do anunciante"
->
-
-<textarea
-id="descricao"
-required
-placeholder="Descreva o imóvel"
-></textarea>
-
-<div class="fotos-label">
-📸 Fotos do imóvel — até 3 fotos
-</div>
-
-<input
-id="fotos"
-type="file"
-accept="image/*"
-multiple
-onchange="mostrarPreview()"
->
-
-<div
-id="preview"
-class="preview"
->
-</div>
-
-</div>
-
-<div class="acoes">
-
-<button
-class="salvar"
-type="submit"
->
-Publicar imóvel
-</button>
-
-<button
-class="cancelar"
-type="button"
-onclick="fecharCadastro()"
->
-Cancelar
-</button>
-
-</div>
-
-<input
-type="hidden"
-id="editandoId"
->
-
-</form>
-
-</section>
-
-
-<section
-class="painel conta"
-id="conta"
->
-
-<h2>👤 Minha conta</h2>
-
-<div class="conta-grid">
-
-<input
-id="nomeUsuario"
-placeholder="Seu nome"
->
-
-<input
-id="emailUsuario"
-type="email"
-placeholder="Seu e-mail"
->
-
-</div>
-
-<div class="conta-acoes">
-
-<button
-class="salvar"
-onclick="salvarConta()"
->
-Salvar conta
-</button>
-
-<button
-class="cancelar"
-onclick="fecharConta()"
->
-Fechar
-</button>
-
-</div>
-
-<div
-id="statusConta"
-class="status"
->
-</div>
-
-</section>
-
-
-<section
-class="lista"
-id="lista"
->
-
-<!-- IMÓVEIS FIXOS -->
-
-<div
-class="card"
-data-cidade="juiz de fora"
-data-bairro="juiz de fora"
-data-tipo="casa"
-data-preco="1200"
->
-
-<div class="foto">
-🏠
-</div>
-
-<div class="conteudo">
-
-<h3>
-Casa com 2 quartos
-</h3>
-
-<div class="local">
-📍 Juiz de Fora - MG
-</div>
-
-<div class="detalhes">
-2 quartos • 1 banheiro • 1 vaga
-</div>
-
-<div class="preco">
-R$ 1.200/mês
-</div>
-
-<button
-class="ver"
-onclick="verImovel('casa2')"
->
-Ver imóvel
-</button>
-
-</div>
-
-</div>
-
-
-<div
-class="card"
-data-cidade="juiz de fora"
-data-bairro="juiz de fora"
-data-tipo="apartamento"
-data-preco="1350"
->
-
-<div class="foto">
-🏢
-</div>
-
-<div class="conteudo">
-
-<h3>
-Apartamento confortável
-</h3>
-
-<div class="local">
-📍 Juiz de Fora - MG
-</div>
-
-<div class="detalhes">
-2 quartos • 1 banheiro • Condomínio
-</div>
-
-<div class="preco">
-R$ 1.350/mês
-</div>
-
-<button
-class="ver"
-onclick="verImovel('apartamento')"
->
-Ver imóvel
-</button>
-
-</div>
-
-</div>
-
-
-<div
-class="card"
-data-cidade="juiz de fora"
-data-bairro="juiz de fora"
-data-tipo="kitnet"
-data-preco="800"
->
-
-<div class="foto">
-🏡
-</div>
-
-<div class="conteudo">
-
-<h3>
-Kitnet mobiliada
-</h3>
-
-<div class="local">
-📍 Juiz de Fora - MG
-</div>
-
-<div class="detalhes">
-1 quarto • 1 banheiro • Mobiliada
-</div>
-
-<div class="preco">
-R$ 800/mês
-</div>
-
-<button
-class="ver"
-onclick="verImovel('kitnet')"
->
-Ver imóvel
-</button>
-
-</div>
-
-</div>
-
-</section>
+  <div id="app"></div>
 
 </main>
 
-
 <script>
 
-let fotosSelecionadas=[];
-
-
-/* CONTA */
-
-function carregarConta(){
-
-const conta=JSON.parse(
-localStorage.getItem("alugaCasaConta") || "{}"
-);
-
-document.getElementById("nomeUsuario").value=
-conta.nome || "";
-
-document.getElementById("emailUsuario").value=
-conta.email || "";
-
-}
-
-function abrirConta(){
-
-document.getElementById("conta").style.display="block";
-
-carregarConta();
-
-document.getElementById("conta")
-.scrollIntoView({behavior:"smooth"});
-
-}
-
-function fecharConta(){
-
-document.getElementById("conta").style.display="none";
-
-}
-
-function salvarConta(){
-
-const nome=
-document.getElementById("nomeUsuario")
-.value.trim();
-
-const email=
-document.getElementById("emailUsuario")
-.value.trim();
-
-localStorage.setItem(
-"alugaCasaConta",
-JSON.stringify({
-nome:nome,
-email:email
-})
-);
-
-const status=
-document.getElementById("statusConta");
-
-status.innerText="✅ Conta salva neste aparelho.";
-
-status.style.display="block";
-
-}
-
-
-/* CADASTRO */
-
-function abrirCadastro(){
-
-document.getElementById("cadastro")
-.style.display="block";
-
-document.getElementById("tituloCadastro")
-.innerText="🏠 Anunciar imóvel";
-
-document.getElementById("editandoId").value="";
-
-document.getElementById("cadastro")
-.scrollIntoView({behavior:"smooth"});
-
-}
-
-function fecharCadastro(){
-
-document.getElementById("cadastro")
-.style.display="none";
-
-}
-
-function mostrarPreview(){
-
-const arquivos=
-Array.from(
-document.getElementById("fotos").files
-).slice(0,3);
-
-const preview=
-document.getElementById("preview");
-
-preview.innerHTML="";
-
-arquivos.forEach(function(arquivo){
-
-const img=document.createElement("img");
-
-img.src=URL.createObjectURL(arquivo);
-
-preview.appendChild(img);
-
-});
-
-}
-
-
-/* CONVERTE FOTO PARA ARMAZENAMENTO */
-
-function converterFoto(arquivo){
-
-return new Promise(function(resolve){
-
-const reader=new FileReader();
-
-reader.onload=function(){
-
-const img=new Image();
-
-img.onload=function(){
-
-const canvas=document.createElement("canvas");
-
-const limite=900;
-
-let largura=img.width;
-let altura=img.height;
-
-if(largura>limite){
-
-altura=
-altura*(limite/largura);
-
-largura=limite;
-
-}
-
-if(altura>limite){
-
-largura=
-largura*(limite/altura);
-
-altura=limite;
-
-}
-
-canvas.width=largura;
-canvas.height=altura;
-
-const ctx=
-canvas.getContext("2d");
-
-ctx.drawImage(
-img,
-0,
-0,
-largura,
-altura
-);
-
-resolve(
-canvas.toDataURL(
-"image/jpeg",
-0.75
-)
-);
+const imoveis = {
+
+  casa2:{
+    titulo:"Casa com 2 quartos",
+    local:"Juiz de Fora - MG",
+    preco:"R$ 1.200/mês",
+    quartos:"2 quartos",
+    banheiro:"1 banheiro",
+    extra:"1 vaga",
+    icone:"🏠",
+    descricao:"Casa para aluguel com 2 quartos, 1 banheiro e 1 vaga. Uma opção prática para quem procura moradia em Juiz de Fora."
+  },
+
+  apartamento:{
+    titulo:"Apartamento confortável",
+    local:"Juiz de Fora - MG",
+    preco:"R$ 1.350/mês",
+    quartos:"2 quartos",
+    banheiro:"1 banheiro",
+    extra:"Condomínio",
+    icone:"🏢",
+    descricao:"Apartamento confortável com 2 quartos, 1 banheiro e estrutura de condomínio. Ideal para quem busca praticidade."
+  },
+
+  kitnet:{
+    titulo:"Kitnet mobiliada",
+    local:"Juiz de Fora - MG",
+    preco:"R$ 800/mês",
+    quartos:"1 quarto",
+    banheiro:"1 banheiro",
+    extra:"Mobiliada",
+    icone:"🏡",
+    descricao:"Kitnet mobiliada para aluguel, com 1 quarto e 1 banheiro. Uma alternativa compacta para morar em Juiz de Fora."
+  }
 
 };
 
-img.src=reader.result;
 
-};
-
-reader.readAsDataURL(arquivo);
-
-});
-
-}
+const id =
+  new URLSearchParams(window.location.search).get("imovel");
 
 
-/* SALVAR */
-
-async function salvarImovel(event){
-
-event.preventDefault();
-
-const editandoId=
-document.getElementById("editandoId").value;
-
-let lista=JSON.parse(
-localStorage.getItem("alugaCasaImoveis") || "[]"
-);
-
-
-/* FOTOS */
-
-const arquivos=
-Array.from(
-document.getElementById("fotos").files
-).slice(0,3);
-
-let fotos=[];
-
-for(const arquivo of arquivos){
-
-fotos.push(
-await converterFoto(arquivo)
-);
-
-}
-
-
-/* SE ESTIVER EDITANDO */
-
-if(editandoId){
-
-const indice=
-lista.findIndex(
-item=>item.id===editandoId
-);
-
-if(indice>=0){
-
-const antigo=lista[indice];
-
-lista[indice]={
-
-...antigo,
-
-titulo:document.getElementById("titulo").value.trim(),
-
-tipo:document.getElementById("cadTipo").value,
-
-local:document.getElementById("cidade").value.trim(),
-
-bairro:document.getElementById("bairro").value.trim(),
-
-quartos:document.getElementById("quartos").value,
-
-banheiro:document.getElementById("banheiros").value,
-
-vagas:document.getElementById("vagas").value,
-
-preco:Number(
-document.getElementById("preco").value
-).toLocaleString(
-"pt-BR",
-{minimumFractionDigits:2}
-),
-
-contato:document.getElementById("contato").value.trim(),
-
-descricao:document.getElementById("descricao").value.trim(),
-
-fotos:
-fotos.length ? fotos : (antigo.fotos || []),
-
-icone:
-document.getElementById("cadTipo").value==="apartamento"
-?"🏢"
-:
-document.getElementById("cadTipo").value==="kitnet"
-?"🏡"
-:"🏠"
-
-};
-
-}
-
-}else{
-
-
-/* NOVO */
-
-const novo={
-
-id:"user_"+Date.now(),
-
-titulo:
-document.getElementById("titulo")
-.value.trim(),
-
-tipo:
-document.getElementById("cadTipo")
-.value,
-
-local:
-document.getElementById("cidade")
-.value.trim(),
-
-bairro:
-document.getElementById("bairro")
-.value.trim(),
-
-quartos:
-document.getElementById("quartos")
-.value,
-
-banheiro:
-document.getElementById("banheiros")
-.value,
-
-vagas:
-document.getElementById("vagas")
-.value,
-
-preco:
-Number(
-document.getElementById("preco")
-.value
-).toLocaleString(
-"pt-BR",
-{minimumFractionDigits:2}
-),
-
-contato:
-document.getElementById("contato")
-.value.trim(),
-
-descricao:
-document.getElementById("descricao")
-.value.trim(),
-
-fotos:fotos,
-
-icone:
-document.getElementById("cadTipo")
-.value==="apartamento"
-?"🏢"
-:
-document.getElementById("cadTipo")
-.value==="kitnet"
-?"🏡"
-:"🏠"
-
-};
-
-lista.push(novo);
-
-}
-
+let cadastrados = [];
 
 try{
 
-localStorage.setItem(
-"alugaCasaImoveis",
-JSON.stringify(lista)
-);
+  cadastrados = JSON.parse(
+    localStorage.getItem("alugaCasaImoveis") || "[]"
+  );
+
+  if(!Array.isArray(cadastrados)){
+    cadastrados = [];
+  }
 
 }catch(e){
 
-alert(
-"Não foi possível salvar as fotos. Tente usar fotos menores."
-);
-
-return;
-
-}
-
-alert(
-editandoId
-?"✅ Imóvel atualizado com sucesso!"
-:"✅ Imóvel publicado com sucesso!"
-);
-
-location.reload();
+  cadastrados = [];
 
 }
 
 
-/* CARREGA ANÚNCIOS */
+let imovel = imoveis[id];
 
-function carregarAnuncios(){
-
-const lista=JSON.parse(
-localStorage.getItem("alugaCasaImoveis") || "[]"
-);
-
-const container=
-document.getElementById("lista");
-
-lista.forEach(function(imovel){
-
-const card=
-document.createElement("div");
-
-card.className="card";
-
-const cidade=
-(imovel.local+" "+imovel.bairro)
-.toLowerCase();
-
-card.dataset.cidade=cidade;
-card.dataset.bairro=
-(imovel.bairro || "").toLowerCase();
-
-card.dataset.tipo=imovel.tipo;
-
-card.dataset.preco=
-String(imovel.preco)
-.replace(/\./g,"")
-.replace(",",".")
-.replace(/[^\d.]/g,"");
+let usuario = false;
 
 
-let foto=imovel.icone || "🏠";
+if(!imovel){
 
-if(imovel.fotos && imovel.fotos.length){
+  imovel = cadastrados.find(function(item){
 
-foto=
-"<img src=\""+
-imovel.fotos[0]+
-"\">";
+    return String(item.id) === String(id);
 
-}
+  });
 
-card.innerHTML=`
-
-<div class="foto">
-${foto}
-</div>
-
-<div class="conteudo">
-
-<h3>
-${imovel.titulo}
-</h3>
-
-<div class="local">
-📍 ${imovel.bairro} - ${imovel.local}
-</div>
-
-<div class="detalhes">
-${imovel.quartos} quartos •
-${imovel.banheiro} banheiros •
-${imovel.vagas} vagas
-</div>
-
-<div class="preco">
-R$ ${imovel.preco}/mês
-</div>
-
-<button
-class="ver"
-onclick="verImovel('${imovel.id}')"
->
-Ver imóvel
-</button>
-
-<div class="botoes-card">
-
-<button
-class="editar"
-onclick="editarImovel('${imovel.id}')"
->
-✏️ Editar
-</button>
-
-<button
-class="excluir"
-onclick="excluirImovel('${imovel.id}')"
->
-🗑️ Excluir
-</button>
-
-</div>
-
-</div>
-
-`;
-
-container.appendChild(card);
-
-});
+  if(imovel){
+    usuario = true;
+  }
 
 }
 
 
-/* BUSCA */
+const app = document.getElementById("app");
 
-function buscarImoveis(){
 
-const texto=
-document.getElementById("busca")
-.value
-.toLowerCase()
-.trim();
+if(!imovel){
 
-const tipo=
-document.getElementById("tipoFiltro")
-.value;
+  app.innerHTML = `
 
-const precoMax=
-Number(
-document.getElementById("precoMax")
-.value
-) || Infinity;
+    <div class="erro">
 
-const cards=
-document.querySelectorAll(".card");
+      <h2>Imóvel não encontrado</h2>
 
-let encontrados=0;
+      <p>
+        Não foi possível localizar este imóvel.
+      </p>
 
-cards.forEach(function(card){
+      <br>
 
-const cidade=
-(card.dataset.cidade || "");
+      <button
+        class="voltar"
+        onclick="history.back()"
+      >
+        Voltar
+      </button>
 
-const tipoCard=
-card.dataset.tipo || "";
+    </div>
 
-const preco=
-Number(card.dataset.preco) || 0;
+  `;
 
-const textoOK=
-!
+}else{
+
+  let fotos =
+    Array.isArray(imovel.fotos)
+    ? imovel.fotos
+    : [];
+
+  let fotoAtual = 0;
+
+
+  function mostrarFoto(){
+
+    const galeria =
+      document.getElementById("galeria");
+
+
+    if(fotos.length > 0){
+
+      galeria.innerHTML = `
+
+        <img
+          src="${fotos[fotoAtual]}"
+          alt="Foto do imóvel"
+        >
+
+        <div class="setas">
+
+          <button onclick="fotoAnterior()">
+            ‹
+          </button>
+
+          <button>
+            ${fotoAtual + 1} / ${fotos.length}
+          </button>
+
+          <button onclick="proximaFoto()">
+            ›
+          </button>
+
+        </div>
+
+      `;
+
+    }else{
+
+      galeria.innerHTML = `
+
+        <div class="emoji">
+          ${imovel.icone || "🏠"}
+        </div>
+
+      `;
+
+    }
+
+  }
+
+
+  window.fotoAnterior = function(){
+
+    if(!fotos.length){
+      return;
+    }
+
+    fotoAtual--;
+
+    if(fotoAtual < 0){
+      fotoAtual = fotos.length - 1;
+    }
+
+    mostrarFoto();
+
+  };
+
+
+  window.proximaFoto = function(){
+
+    if(!fotos.length){
+      return;
+    }
+
+    fotoAtual++;
+
+    if(fotoAtual >= fotos.length){
+      fotoAtual = 0;
+    }
+
+    mostrarFoto();
+
+  };
+
+
+  let preco =
+    String(imovel.preco || "");
+
+
+  if(!preco.includes("/mês")){
+
+    preco = "R$ " + preco + "/mês";
+
+  }
+
+
+  let local = "";
+
+
+  if(imovel.bairro){
+
+    local += imovel.bairro + " - ";
+
+  }
+
+
+  local += imovel.local || "";
+
+
+  let quartos =
+    imovel.quartos
+    ? imovel.quartos + " quartos"
+    : "Não informado";
+
+
+  let banheiro =
+    imovel.banheiro
+    ? imovel.banheiro + " banheiros"
+    : "Não informado";
+
+
+  let extra =
+    imovel.extra ||
+    (
+      imovel.vagas
+      ? imovel.vagas + " vagas"
+      : "Não informado"
+    );
+
+
+  app.innerHTML = `
+
+    <div
+      class="galeria"
+      id="galeria"
+    ></div>
+
+
+    <div class="conteudo">
+
+      <h1>
+        ${imovel.titulo || "Imóvel para aluguel"}
+      </h1>
+
+
+      <div class="local">
+        📍 ${local}
+      </div>
+
+
+      <div class="preco">
+        ${preco}
+      </div>
+
+
+      <div class="info">
+
+        <div class="item">
+
+          <strong>🛏️</strong>
+
+          ${quartos}
+
+        </div>
+
+
+        <div class="item">
+
+          <strong>🚿</strong>
+
+          ${banheiro}
+
+        </div>
+
+
+        <div class="item">
+
+          <strong>⭐</strong>
+
+          ${extra}
+
+        </div>
+
+      </div>
+
+
+      <div class="descricao">
+
+        <h2>
+          Sobre o imóvel
+        </h2>
+
+        <p>
+          ${imovel.descricao || "Descrição não informada."}
+        </p>
+
+      </div>
+
+
+      <button
+        class="contato"
+        onclick="interesse()"
+      >
+        📱 Falar com o anunciante pelo WhatsApp
+      </button>
+
+
+      ${
+        usuario
+        ? `
+
+          <button
+            class="editar"
+            onclick="editar()"
+          >
+            ✏️ Editar este anúncio
+          </button>
+
+
+          <button
+            class="excluir"
+            onclick="excluir()"
+          >
+            🗑️ Excluir este anúncio
+          </button>
+
+        `
+        : ""
+      }
+
+    </div>
+
+  `;
+
+
+  mostrarFoto();
+
+}
+
+
+function interesse(){
+
+  if(!imovel){
+    return;
+  }
+
+
+  if(!imovel.contato){
+
+    alert(
+      "O anunciante não informou um número de WhatsApp."
+    );
+
+    return;
+
+  }
+
+
+  let numero =
+    String(imovel.contato)
+    .replace(/\D/g,"");
+
+
+  if(numero.startsWith("0")){
+
+    numero = numero.substring(1);
+
+  }
+
+
+  if(!numero.startsWith("55")){
+
+    numero = "55" + numero;
+
+  }
+
+
+  if(numero.length < 12){
+
+    alert(
+      "O número de WhatsApp informado parece estar incompleto."
+    );
+
+    return;
+
+  }
+
+
+  window.location.href =
+    "https://wa.me/" + numero;
+
+}
+
+
+function editar(){
+
+  window.location.href =
+    "index.html?editar=" +
+    encodeURIComponent(imovel.id);
+
+}
+
+
+function excluir(){
+
+  if(!confirm(
+    "Tem certeza que deseja excluir este anúncio?"
+  )){
+
+    return;
+
+  }
+
+
+  let lista = JSON.parse(
+    localStorage.getItem("alugaCasaImoveis") || "[]"
+  );
+
+
+  lista = lista.filter(function(item){
+
+    return String(item.id) !== String(imovel.id);
+
+  });
+
+
+  localStorage.setItem(
+    "alugaCasaImoveis",
+    JSON.stringify(lista)
+  );
+
+
+  alert(
+    "🗑️ Anúncio excluído com sucesso."
+  );
+
+
+  window.location.href = "index.html";
+
+}
+
+</script>
+
+</body>
+</html>
